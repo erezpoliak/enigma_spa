@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as Api from "./Api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowCircleLeft,
+  faArrowCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
+import Spinner from "./Spinner";
 
 const Feed = () => {
   //   const [data, setData] = useState();
@@ -12,7 +18,15 @@ const Feed = () => {
   //     };
 
   //     getData();
+  //   const dataForPage = data.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10);
   //   }, []);
+
+  const [pageNum, setPageNum] = useState(1);
+
+  const leftArrowClicked = () => (pageNum > 1 ? setPageNum(pageNum - 1) : "");
+
+  const rightArrowClicked = () =>
+    pageNum < data.length / 10 ? setPageNum(pageNum + 1) : "";
 
   const data = [
     {
@@ -193,10 +207,13 @@ const Feed = () => {
     },
   ];
 
+  const dataForPage = data.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10);
+
   return (
-    <Grid>
-      {data
-        ? data.map((i) => {
+    <div>
+      <Grid>
+        {dataForPage ? (
+          dataForPage.map((i) => {
             return (
               <>
                 <ColumnData>{i.currency}</ColumnData>
@@ -211,8 +228,26 @@ const Feed = () => {
               </>
             );
           })
-        : ""}
-    </Grid>
+        ) : (
+          <SpinnerWrapper>
+            <Spinner />
+          </SpinnerWrapper>
+        )}
+      </Grid>
+      <PageSelector>
+        <FontAwesomeIcon
+          icon={faArrowCircleLeft}
+          style={{ fontSize: "4.5vh", cursor: "pointer" }}
+          onClick={leftArrowClicked}
+        />
+        <PageNumber>{pageNum}</PageNumber>
+        <FontAwesomeIcon
+          icon={faArrowCircleRight}
+          style={{ fontSize: "4.5vh", cursor: "pointer" }}
+          onClick={rightArrowClicked}
+        />
+      </PageSelector>
+    </div>
   );
 };
 
@@ -221,8 +256,8 @@ export default Feed;
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(9, 10%);
-  /* grid-template-rows: repeat(10, 8%); */
   justify-content: space-around;
+  height: 80%;
 `;
 
 const ColumnData = styled.div`
@@ -230,4 +265,22 @@ const ColumnData = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
+`;
+
+const PageSelector = styled.div`
+  padding-top: 6vh;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+`;
+
+const PageNumber = styled.div`
+  padding: 1vh;
+  font-size: 2.5vh;
+`;
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
