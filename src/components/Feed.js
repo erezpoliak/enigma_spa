@@ -9,205 +9,30 @@ import {
 import Spinner from "./Spinner";
 
 const Feed = () => {
-  //   const [data, setData] = useState();
-
-  //   useEffect(() => {
-  //     const getData = async () => {
-  //       const fetchedData = await Api.getData();
-  //       setData(fetchedData);
-  //     };
-
-  //     getData();
-  //   const dataForPage = data.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10);
-  //   }, []);
-
+  const [data, setData] = useState();
   const [pageNum, setPageNum] = useState(1);
+
+  useEffect(() => {
+    const getData = async () => {
+      const fetchedData = await Api.getData();
+      setData(fetchedData);
+    };
+
+    getData();
+
+    const interval = setInterval(() => getData(), 1200000);
+
+    return clearInterval(interval);
+  }, []);
 
   const leftArrowClicked = () => (pageNum > 1 ? setPageNum(pageNum - 1) : "");
 
   const rightArrowClicked = () =>
     pageNum < data.length / 10 ? setPageNum(pageNum + 1) : "";
 
-  const data = [
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-    {
-      currency: "40",
-      rate: "2.89238",
-      bid: "1280938",
-      ask: "137946",
-      high: "12734",
-      low: "8374",
-      open: "214897",
-      close: "12983",
-      timestamp: "1280478912",
-    },
-  ];
-
-  const dataForPage = data.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10);
+  const dataForPage = data
+    ? data.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10)
+    : "";
 
   return (
     <div>
