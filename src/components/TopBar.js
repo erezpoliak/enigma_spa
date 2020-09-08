@@ -23,7 +23,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(9, 10%);
   justify-content: space-around;
-  padding: 2.5vh;
+  padding: 2.5vh 0 2.5vh 0;
   font-size: 1.2rem;
   background-color: #00838f;
 `;
@@ -31,4 +31,5 @@ const Container = styled.div`
 const Column = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
 `;

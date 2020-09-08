@@ -1,12 +1,16 @@
 import React from "react";
 import TopBar from "./TopBar";
-import { createGlobalStyle } from "styled-components";
+import Feed from "./Feed";
+import styled, { createGlobalStyle } from "styled-components";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <TopBar />
+      <Grid>
+        <TopBar />
+        <Feed />
+      </Grid>
     </>
   );
 };
@@ -22,4 +26,9 @@ const GlobalStyle = createGlobalStyle`
    font-size: 10px;
    color: #424242;
  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-rows: 12vh 88vh;
 `;
