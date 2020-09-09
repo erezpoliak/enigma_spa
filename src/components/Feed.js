@@ -22,7 +22,7 @@ const Feed = () => {
 
     const interval = setInterval(() => getData(), 1200000);
 
-    return clearInterval(interval);
+    return () => clearInterval(interval);
   }, []);
 
   const leftArrowClicked = () => (pageNum > 1 ? setPageNum(pageNum - 1) : "");
