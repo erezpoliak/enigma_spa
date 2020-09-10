@@ -25,16 +25,16 @@ const Feed = () => {
     getData();
   }, []);
 
-  // const getTime = (utc) => {
-  //   const date = new Date(utc * 1000);
-  //   let stringDate = date.toTimeString();
-  //   stringDate = stringDate.split("G");
-  //   let result = stringDate[0].split(" ");
-  //   result = result[0];
-  //   let Arr = result.split("");
-  //   Arr.splice(-3, 3);
-  //   return [...Arr];
-  // };
+  const getTime = (utc) => {
+    const date = new Date(utc * 1000);
+    let stringDate = date.toTimeString();
+    stringDate = stringDate.split("G");
+    let result = stringDate[0].split(" ");
+    result = result[0];
+    let Arr = result.split("");
+    Arr.splice(-3, 3);
+    return [...Arr];
+  };
 
   const leftArrowClicked = () => (pageNum > 1 ? setPageNum(pageNum - 1) : "");
 
@@ -61,7 +61,7 @@ const Feed = () => {
                 <ColumnData>{i.low}</ColumnData>
                 <ColumnData>{i.open}</ColumnData>
                 <ColumnData>{i.close}</ColumnData>
-                <ColumnData>{i.timestamp}</ColumnData>
+                <ColumnData>{getTime(i.timestamp)}</ColumnData>
               </>
             );
           })
@@ -121,4 +121,5 @@ const SpinnerWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100vw;
 `;
