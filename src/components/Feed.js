@@ -15,15 +15,26 @@ const Feed = () => {
   useEffect(() => {
     const getData = async () => {
       const fetchedData = await Api.getData();
-      setData(fetchedData);
+      if (!fetchedData[0].error) {
+        window.localStorage.setItem("data", JSON.stringify(fetchedData));
+      }
+      const localData = JSON.parse(window.localStorage.getItem("data"));
+      setData(localData);
     };
 
     getData();
-
-    const interval = setInterval(() => getData(), 1200000);
-
-    return () => clearInterval(interval);
   }, []);
+
+  // const getTime = (utc) => {
+  //   const date = new Date(utc * 1000);
+  //   let stringDate = date.toTimeString();
+  //   stringDate = stringDate.split("G");
+  //   let result = stringDate[0].split(" ");
+  //   result = result[0];
+  //   let Arr = result.split("");
+  //   Arr.splice(-3, 3);
+  //   return [...Arr];
+  // };
 
   const leftArrowClicked = () => (pageNum > 1 ? setPageNum(pageNum - 1) : "");
 
@@ -34,6 +45,7 @@ const Feed = () => {
     ? data.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10)
     : "";
 
+  console.log(data);
   return (
     <div>
       <Grid>
@@ -108,4 +120,5 @@ const SpinnerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 `;
